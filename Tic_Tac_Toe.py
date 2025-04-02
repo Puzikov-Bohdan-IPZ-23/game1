@@ -12,9 +12,14 @@ class TicTacToe:
             print('-' * (self.size * 2 - 1))
 
     def make_move(self, row, col):
+        # Оскільки користувач вводить 1-3, а списки у Python починаються з 0, треба відняти 1
+        row -= 1
+        col -= 1
+
         if 0 <= row < self.size and 0 <= col < self.size and self.board[row][col] == ' ':
             self.board[row][col] = self.current_player
             if self.check_winner(row, col):
+                self.print_board()
                 print(f'Гравець {self.current_player} виграв!')
                 return True
             self.current_player = 'O' if self.current_player == 'X' else 'X'
@@ -23,7 +28,6 @@ class TicTacToe:
         return False
 
     def check_winner(self, row, col):
-        # Перевірка рядків, стовпців та діагоналей
         if all(self.board[row][c] == self.current_player for c in range(self.size)) or \
            all(self.board[r][col] == self.current_player for r in range(self.size)) or \
            all(self.board[i][i] == self.current_player for i in range(self.size)) or \
@@ -37,7 +41,6 @@ class TicTacToe:
             try:
                 row, col = map(int, input(f'Гравець {self.current_player}, введіть координати (рядок і стовпчик через пробіл): ').split())
                 if self.make_move(row, col):
-                    self.print_board()
                     break
             except ValueError:
                 print('Будь ласка, введіть два числа через пробіл.')
