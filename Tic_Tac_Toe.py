@@ -10,7 +10,7 @@ class TicTacToe:
         self.current_player = 'X'
         self.bgcolor = bgcolor
         self.bg = self.get_background_color(bgcolor)
-
+ 
     def get_background_color(self, color_name):
         colors = {
             "black": Back.BLACK,
